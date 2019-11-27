@@ -25,5 +25,5 @@
   display: block;
 }
 .floor_wrap .floor_group .floor_group_content .floor_item:nth-last-child(-n + 4) image {
-  height: 217.97413793rpx;
+  height: 208.97413793rpx;
 }
