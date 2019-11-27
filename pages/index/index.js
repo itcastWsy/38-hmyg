@@ -11,24 +11,21 @@
 
  */
 Page({
-  data:{
+  data: {
     // 轮播图数组
-    swiperList:[]
+    swiperList: []
   },
   onLoad() {
-    // 1 发送异步请求  https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html
-
+    //  1 发送异步请求  https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html
     wx.request({
       url: 'https://api.zbztb.cn/api/public/v1/home/swiperdata',
       success: (result) => {
         // 特别小心 箭头函数 和 this的关系 
         // console.log(result.data.message);
         this.setData({
-          swiperList:result.data.message
+          swiperList: result.data.message
         })
       }
     });
-
-
   }
 })

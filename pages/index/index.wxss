@@ -1,0 +1,3 @@
+.swiper_wrap swiper {
+  height: 340rpx;
+}

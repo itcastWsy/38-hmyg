@@ -1,18 +1,26 @@
 <!-- 轮播图 开始 -->
 <view class="swiper_wrap">
   <!-- 
-    swiper
+    swiper 默认的高度 150px
     1 有三个属性要经常出现
       1 自动播放
       2 衔接播放
       3 小圆点 
     
+    image 320*240
+    1 mode 渲染模式
+      widthFix 让图片的高度 跟随着图片的宽度变化而变化 
+
+    让 swiper标签的高度动态变化  
+    
+    swiper.width/swiper.height= 图片的宽度/图片的高度
+    750rpx / height = 750px/340px
    -->
 
 
   <swiper autoplay indicator-dots circular>
     <swiper-item wx:for="{{swiperList}}" wx:key="goods_id">
-      <image src="{{item.image_src}}"></image>
+      <image mode="widthFix" src="{{item.image_src}}"></image>
     </swiper-item>
   </swiper>
 </view>
