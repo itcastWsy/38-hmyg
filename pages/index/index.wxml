@@ -1,0 +1,19 @@
+<!-- 轮播图 开始 -->
+<view class="swiper_wrap">
+  <!-- 
+    swiper
+    1 有三个属性要经常出现
+      1 自动播放
+      2 衔接播放
+      3 小圆点 
+    
+   -->
+
+
+  <swiper autoplay indicator-dots circular>
+    <swiper-item wx:for="{{swiperList}}" wx:key="goods_id">
+      <image src="{{item.image_src}}"></image>
+    </swiper-item>
+  </swiper>
+</view>
+<!-- 轮播图 结束 -->
