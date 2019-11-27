@@ -25,3 +25,11 @@
   </swiper>
 </view>
 <!-- 轮播图 结束 -->
+
+<!-- 导航 开始 -->
+<view class="navs">
+  <navigator class="nav_item" wx:for="{{navs}}" wx:key="name">
+    <image mode="widthFix" src="{{item.image_src}}"></image>
+  </navigator>
+</view>
+<!-- 导航 结束 -->

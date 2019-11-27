@@ -13,7 +13,9 @@
 Page({
   data: {
     // 轮播图数组
-    swiperList: []
+    swiperList: [],
+    // 导航
+    navs: []
   },
   onLoad() {
     //  1 发送异步请求  https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html
@@ -27,5 +29,17 @@ Page({
         })
       }
     });
+
+    // 2 获取导航数据
+    wx.request({
+      url: 'https://api.zbztb.cn/api/public/v1/home/catitems',
+      success: (result) => {
+        // console.log(result);
+        this.setData({
+          navs:result.data.message
+        })
+      }
+    });
+
   }
 })
