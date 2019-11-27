@@ -1,3 +1,4 @@
+<SearchInput></SearchInput>
 <!-- 轮播图 开始 -->
 <view class="swiper_wrap">
   <!-- 
@@ -33,3 +34,42 @@
   </navigator>
 </view>
 <!-- 导航 结束 -->
+
+<!-- 楼层 开始 -->
+<view class="floor_wrap">
+  <!-- 时尚女装 -->
+  <view class="floor_group" wx:for="{{floorList}}" wx:for-item="item1" wx:for-index="index1" wx:key="item1.floor_title">
+    <!-- 
+      item1 = {
+        floor_title:{
+          image_src:"图片路径"
+        }
+        product_list:[]
+      }
+     -->
+    <!-- 标题 -->
+    <view class="floor_group_title">
+      <image mode="widthFix" src="{{item1.floor_title.image_src}}"></image>
+    </view>
+    <!-- 内容 -->
+    <view class="floor_group_content">
+      <!-- 
+        1 对第一张图片还是做 高度自适应  mode="widthFix"
+        2 对剩下的4张图片做个处理
+          1 给高度计算 =  第一张大图的 一半 ！ （232 * 386 ）
+            第一张图片的宽度 /  第一张图片的高度 =  变化后的第一张图片的宽度/  变化后第一张图片的高度
+
+            232 / 386 = (750rpx/3) / height
+            小图片的高度  height = 750rpx/3 *  386 / 232  / 2 
+          2 mode="scaleToFill" 
+        
+       -->
+      <navigator class="floor_item" wx:for="{{item1.product_list}}" wx:for-item="item2" wx:for-index="index2"
+        wx:key="item2.name">
+        <image src="{{item2.image_src}}" mode="{{index2===0?'widthFix':'scaleToFill'}}"></image>
+      </navigator>
+    </view>
+  </view>
+  <!-- 时尚女装 -->
+</view>
+<!-- 楼层 结束 -->

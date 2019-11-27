@@ -12,3 +12,18 @@
 .navs .nav_item image {
   width: 70%;
 }
+.floor_wrap .floor_group .floor_group_content {
+  overflow: hidden;
+  /* 后4个超链接 */
+}
+.floor_wrap .floor_group .floor_group_content .floor_item {
+  float: left;
+  width: 33.33%;
+}
+.floor_wrap .floor_group .floor_group_content .floor_item image {
+  /* 去除图片默认的3px间隙！！！ */
+  display: block;
+}
+.floor_wrap .floor_group .floor_group_content .floor_item:nth-last-child(-n + 4) image {
+  height: 217.97413793rpx;
+}

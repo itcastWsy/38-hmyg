@@ -15,7 +15,9 @@ Page({
     // 轮播图数组
     swiperList: [],
     // 导航
-    navs: []
+    navs: [],
+    // 楼层数组
+    floorList: []
   },
   onLoad() {
     //  1 发送异步请求  https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html
@@ -36,10 +38,21 @@ Page({
       success: (result) => {
         // console.log(result);
         this.setData({
-          navs:result.data.message
+          navs: result.data.message
         })
       }
     });
+
+    // 3 获取楼层数据
+    wx.request({
+      url: 'https://api.zbztb.cn/api/public/v1/home/floordata',
+      success: (result) => {
+        this.setData({
+          floorList: result.data.message
+        })
+      }
+    });
+
 
   }
 })

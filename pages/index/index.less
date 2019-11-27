@@ -1,17 +1,42 @@
-.swiper_wrap{
-  swiper{
+.swiper_wrap {
+  swiper {
     height: 340rpx;
   }
 }
 
-.navs{
+.navs {
   display: flex;
   padding: 5rpx 0;
-  .nav_item{
+  .nav_item {
     flex: 1;
     text-align: center;
-    image{
+    image {
       width: 70%;
+    }
+  }
+}
+
+.floor_wrap {
+  .floor_group {
+    .floor_group_title {
+    }
+    .floor_group_content {
+      // height: (750rpx/3 * 386 / 232);
+      overflow: hidden;
+      .floor_item {
+        float: left;
+        width: 33.33%;
+        image {
+          /* 去除图片默认的3px间隙！！！ */
+          display: block;
+        }
+      }
+      /* 后4个超链接 */
+      .floor_item:nth-last-child(-n + 4) {
+        image {
+          height: (750rpx/3 * 386 / 232 / 2)+10;
+        }
+      }
     }
   }
 }

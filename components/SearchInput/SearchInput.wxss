@@ -1,0 +1,16 @@
+.search_input {
+  /* 80rpx =40px  如果设计稿是375px */
+  height: 80rpx;
+  padding: 15rpx;
+  background-color: #eb4450;
+}
+.search_input view {
+  height: 100%;
+  background-color: #fff;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  color: #666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
