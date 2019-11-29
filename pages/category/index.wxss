@@ -18,6 +18,10 @@
   justify-content: center;
   align-items: center;
 }
+.menu_item.active {
+  border-left: 5rpx solid #eb4450;
+  color: #eb4450;
+}
 .cate_goods {
   flex: 1;
   /* 不超的时候就没有滚动条 超出了就有滚动条 */

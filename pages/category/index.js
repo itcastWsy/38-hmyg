@@ -8,7 +8,11 @@
 2 左侧菜单动态渲染
 3 右侧内容的动态渲染
 4 点击左侧菜单 右侧内容动态渲染
+  ? 使用css变量把主题色存下来  -  不是less中的变量 用的原生的css的重量
+  * 1 左侧菜单的激活选中 
+  ! 2 右侧的内容 跟着切换显示
 5 缓存。。 
+  1 小程序中的本地存储 类似h5里面（有区别）
  */
 
 import request from "../../utils/request";
@@ -27,12 +31,14 @@ Page({
     // leftMenus:["大家电","海外购"....],
     leftMenus: [],
     // 右侧的内容 列表
-    rightGoods: []
+    rightGoods: [],
+    // 被激活的索引
+    currentIndex: 0
   },
   // 全局的内部的数据  wxml中找不到   Cates
   // js内部要使用的全局数据 
   Cates: [],
-  onLoad() {  
+  onLoad() {
 
     request({ url: "categories" })
       .then(res => {
@@ -47,7 +53,7 @@ Page({
         this.setData({
           leftMenus: this.Cates.map(v => v.cat_name),
           // 右侧的内容
-          rightGoods:this.Cates[0].children
+          rightGoods: this.Cates[this.data.currentIndex].children
         })
 
         // 右侧要实现的 商品数组 
@@ -55,5 +61,14 @@ Page({
 
       })
     // console.log(mockData);
+  },
+  // 左侧菜单的点击事件
+  handleMenuTap(e) {
+    const currentIndex = e.currentTarget.dataset.index;
+    this.setData({
+      currentIndex,
+      // 右侧的内容
+      rightGoods: this.Cates[currentIndex].children
+    })  
   }
 })

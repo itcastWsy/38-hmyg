@@ -6,13 +6,13 @@
   高度 = 视口的宽度（100vh）  - 头部搜索框的高度 
  -->
   <view class="cate_menus">
-    <view class="menu_item" wx:for="{{leftMenus}}" wx:key="item">{{item}}</view>
+    <view bindtap="handleMenuTap" data-index="{{index}}"  class="menu_item {{currentIndex===index?'active':''}}" wx:for="{{leftMenus}}" wx:key="item">{{item}}</view>
   </view>
   <!-- 右侧
    高度 = 视口的宽度（100vh）  - 头部搜索框的高度 
  -->
   <view class="cate_goods">
-    <view class="goods_group" wx:for="{{rightGoods}}" wx:for-item="item1" wx:for-index="index1" wx:key="">
+    <view class="goods_group" wx:for="{{rightGoods}}" wx:for-item="item1" wx:for-index="index1" wx:key="cat_id">
       <!-- 
       item1 ={ 
         cat_id	:	3
@@ -26,7 +26,7 @@
      -->
       <view class="goods_group_title"> / {{item1.cat_name}} / </view>
       <view class="goods_group_content">
-        <view wx:for="{{item1.children}}" wx:for-item="item2" wx:for-index="index2" class="goods_item">
+        <view wx:for="{{item1.children}}" wx:for-item="item2" wx:for-index="index2"  wx:key="cat_id" class="goods_item">
           <image mode="widthFix" src="{{item2.cat_icon}}"></image>
           <view class="item_name">{{item2.cat_name}}</view>
         </view>
