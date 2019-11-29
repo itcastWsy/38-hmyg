@@ -1,6 +1,7 @@
 .cate_view {
   /* 以前的less   20vh height：calc(20vh)  */
   /* 在less 对~'' 里面代码不做编译处理 原样输出  */
+  // height: ~"calc(100vh - 80rpx)";
   height: calc(100vh - 80rpx);
   display: flex;
 }
@@ -11,6 +12,7 @@
   /* 不超的时候就没有滚动条 超出了就有滚动条 */
   overflow: auto;
 }
+
 .menu_item {
   height: 80rpx;
   font-size: 28rpx;
@@ -22,24 +24,29 @@
   flex: 1;
   /* 不超的时候就没有滚动条 超出了就有滚动条 */
   overflow: auto;
-}
-.cate_goods .goods_group .goods_group_title {
-  height: 80rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26rpx;
-}
-.cate_goods .goods_group .goods_group_content {
-  display: flex;
-  flex-wrap: wrap;
-}
-.cate_goods .goods_group .goods_group_content .goods_item {
-  width: 33.33%;
-  text-align: center;
-  font-size: 24rpx;
-  color: #666666;
-}
-.cate_goods .goods_group .goods_group_content .goods_item image {
-  width: 50%;
+  .goods_group {
+    .goods_group_title {
+      height: 80rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26rpx;
+    }
+    .goods_group_content {
+      display: flex;
+      flex-wrap: wrap;
+      .goods_item {
+        width: 33.33%;
+        text-align: center;
+        font-size: 24rpx;
+        color: #666666;
+        image {
+          width: 50%;
+        }
+
+        .item_name {
+        }
+      }
+    }
+  }
 }
