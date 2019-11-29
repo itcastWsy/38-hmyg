@@ -10,6 +10,12 @@
 ? 3 
 
  */
+
+//  引入统一发送异步请求的函数
+import request from "../../utils/request";
+
+
+
 Page({
   data: {
     // 轮播图数组
@@ -20,39 +26,26 @@ Page({
     floorList: []
   },
   onLoad() {
-    //  1 发送异步请求  https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html
-    wx.request({
-      url: 'https://api.zbztb.cn/api/public/v1/home/swiperdata',
-      success: (result) => {
-        // 特别小心 箭头函数 和 this的关系 
-        // console.log(result.data.message);
+    request({ url: "home/swiperdata" })
+      .then(result => {
         this.setData({
           swiperList: result.data.message
         })
-      }
-    });
+      })
 
-    // 2 获取导航数据
-    wx.request({
-      url: 'https://api.zbztb.cn/api/public/v1/home/catitems',
-      success: (result) => {
-        // console.log(result);
+    request({ url: "home/catitems" })
+      .then(result => {
         this.setData({
           navs: result.data.message
         })
-      }
-    });
+      })
 
-    // 3 获取楼层数据
-    wx.request({
-      url: 'https://api.zbztb.cn/api/public/v1/home/floordata',
-      success: (result) => {
+    request({ url: "home/floordata" })
+      .then(result => {
         this.setData({
           floorList: result.data.message
         })
-      }
-    });
-
+      })
 
   }
 })
