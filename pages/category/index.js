@@ -11,6 +11,7 @@
   ? 使用css变量把主题色存下来  -  不是less中的变量 用的原生的css的重量
   * 1 左侧菜单的激活选中 
   ! 2 右侧的内容 跟着切换显示
+todo 3 右侧列表 在被点击切换后，滚动条 都重新置顶！！！  
 5 缓存。。 
   1 小程序中的本地存储 类似h5里面（有区别）
  */
@@ -33,7 +34,9 @@ Page({
     // 右侧的内容 列表
     rightGoods: [],
     // 被激活的索引
-    currentIndex: 0
+    currentIndex: 0,
+    // 右侧滚动条的高度
+    scrollTop: 0
   },
   // 全局的内部的数据  wxml中找不到   Cates
   // js内部要使用的全局数据 
@@ -68,7 +71,9 @@ Page({
     this.setData({
       currentIndex,
       // 右侧的内容
-      rightGoods: this.Cates[currentIndex].children
-    })  
+      rightGoods: this.Cates[currentIndex].children,
+      // 控制右侧列表的滚动条的 距离的！！
+      scrollTop:0
+    })
   }
 })

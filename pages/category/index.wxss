@@ -25,7 +25,7 @@
 .cate_goods {
   flex: 1;
   /* 不超的时候就没有滚动条 超出了就有滚动条 */
-  overflow: auto;
+  overflow: hidden;
 }
 .cate_goods .goods_group .goods_group_title {
   height: 80rpx;
