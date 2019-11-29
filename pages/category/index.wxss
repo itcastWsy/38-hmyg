@@ -19,8 +19,8 @@
   align-items: center;
 }
 .menu_item.active {
-  border-left: 5rpx solid #eb4450;
-  color: #eb4450;
+  color: var(--themeColor);
+  border-left: 5rpx solid currentColor;
 }
 .cate_goods {
   flex: 1;

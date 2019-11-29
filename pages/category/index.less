@@ -1,3 +1,5 @@
+// @import "../../styles/common.less";
+
 .cate_view {
   /* 以前的less   20vh height：calc(20vh)  */
   /* 在less 对~'' 里面代码不做编译处理 原样输出  */
@@ -20,9 +22,13 @@
   justify-content: center;
   align-items: center;
 }
-.menu_item.active{
-  border-left: 5rpx solid #eb4450;
-  color: #eb4450;
+.menu_item.active {
+  // color: var(--themeColor);
+
+  // currentColor 是原生的css的属性  ==  当前的字体的颜色
+
+  color: var(--themeColor);
+  border-left: 5rpx solid currentColor;
 }
 .cate_goods {
   flex: 1;
