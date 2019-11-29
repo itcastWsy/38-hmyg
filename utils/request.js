@@ -11,5 +11,4 @@ function axios({ url, ...params }) {
   })
 }
 
-
 export default axios;

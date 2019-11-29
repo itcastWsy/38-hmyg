@@ -1,1 +1,21 @@
-/* pages/category/index.wxss */
+
+.cate_view{
+  height: calc(100vh - 80rpx);
+  background-color: aqua;
+  display: flex; 
+}
+.cate_menus{  
+
+  /* 子项的高度 默认等于 =父项的高度 */
+  /* height: 100%; */
+  width: 200rpx;
+  background-color: red;
+  /* 不超的时候就没有滚动条 超出了就有滚动条 */
+  overflow: auto;
+}
+.cate_goods{
+  flex: 1;
+  background-color: yellow;
+  /* 不超的时候就没有滚动条 超出了就有滚动条 */
+  overflow: auto;
+}
