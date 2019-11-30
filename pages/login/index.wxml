@@ -1,2 +1,12 @@
-<!--pages/login/index.wxml-->
-<text>pages/login/index.wxml</text>
+<!-- 这个用来显示 封装的tab组件 -->
+<view>
+    <Tabbar 
+    bindtitleChange="titleChange"
+    currentIndex="{{currentIndex}}" 
+    titles="{{titles}}">
+    <view wx:if="{{currentIndex===0}}" >0</view>
+    <view wx:elif="{{currentIndex===1}}"  >1</view>
+    <view wx:else>2</view>
+</Tabbar>
+</view>  
+  
