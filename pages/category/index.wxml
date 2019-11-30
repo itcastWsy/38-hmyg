@@ -26,7 +26,7 @@
      -->
       <view class="goods_group_title"> / {{item1.cat_name}} / </view>
       <view class="goods_group_content">
-        <navigator url="/pages/goods_list/index?iiiddd=111222" wx:for="{{item1.children}}" wx:for-item="item2" wx:for-index="index2"  wx:key="cat_id" class="goods_item">
+        <navigator url="/pages/goods_list/index?cid={{item2.cat_id}}" wx:for="{{item1.children}}" wx:for-item="item2" wx:for-index="index2"  wx:key="cat_id" class="goods_item">
           <image mode="widthFix" src="{{item2.cat_icon}}"></image>
           <view class="item_name">{{item2.cat_name}}</view>
         </navigator>

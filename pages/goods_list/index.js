@@ -1,66 +1,62 @@
-// pages/goods_list/index.js
+/* 
+1 在 分类页面 商品动态渲染的时候 加上 超链接 和 对应的分类id 
+2 定义接口的参数 
+  ! 为了方便修改 把参数变成全局变量 
+3 发送请求 获取 商品列表数据
+
+ */
+
+
+
+import request from "../../utils/request";
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
-  data: {
-
+  // 全局的接口参数
+  Params: {
+    // 查询关键字 "小米"
+    query: "",
+    // 分类id
+    cid: -1,
+    // 页码 第几页 
+    pagenum: 1,
+    // 页容量 -> 每一页可以放几条数据
+    pagesize: 2
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    console.log(options);
+
+  data:{
+    // 要显示的商品列表
+    goods:[]
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
 
+
+  onLoad(options) {
+    this.Params.cid = options.cid;
+    
+    this.getList();
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+  // 获取商品列表数据
+  getList() {
+    request({
+      url: "goods/search",
+      data: this.Params
+    })
+    .then(res=>{
+      console.log(res);
 
-  },
+      this.setData({
+        goods:res.data.message.goods
+      })
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
+      // console.table(res.data.message.goods)
+    })
 
-  },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
   }
+
+
+
 })
