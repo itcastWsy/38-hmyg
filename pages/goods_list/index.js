@@ -16,10 +16,22 @@
 !  2 有数据 
    1  当前页码 ++ 
    2 再调用 获取接口数据的函数 
-
+5 下拉刷新数据
+  0 先触发下拉刷新事件  onPullDownRefresh
+  1 当用户触发下拉刷新的时候 体验  ===  用户第一次打开 商品列表页面 
+  2 思考
+    1 先打开页面
+    2 不断的加载下一页数据 加载第10页数据
+      1 pagenum =10 
+      2 页面的商品数据 很多  goods
+    3 开始触发下拉刷新了 
+      1 其实也是触发了一个事件
+        1 数据重置 ！！ 
+        2 goods =  第一页的10条数据即可
+        3 pagenum=1
+          goods=[]
+          this.getList()
  */
-
-
 
 import request from "../../utils/request";
 
@@ -90,6 +102,15 @@ Page(
         // 发送请求获取下一页的数据
         this.getList();
       }
+    },
+    // 下拉刷新
+    onPullDownRefresh() {
+      // console.log("狗丢了怎么办？？？  搜狗搜索！！！");
+      this.Params.pagenum=1;
+      this.setData({
+        goods:[]
+      })
+      this.getList();
     }
 
 
