@@ -31,10 +31,17 @@
         3 pagenum=1
           goods=[]
           this.getList()
+
+
+6 给商品列表添加默认图片
+  1 在商品列表循环的时候 判断一下  goods_small_logo 是否为空即可
+
+7 添加全局的加载中的效果
+  1 在发送请求之前 显示 “加载中”
+  2 在请求回来之后 隐藏 “加载中”
+  
  */
-
 import request from "../../utils/request";
-
 Page(
   {
     // 全局的接口参数
@@ -55,12 +62,8 @@ Page(
       // 要显示的商品列表
       goods: []
     },
-
-
-
     onLoad(options) {
       this.Params.cid = options.cid;
-
       this.getList();
     },
 
@@ -71,9 +74,6 @@ Page(
         data: this.Params
       })
         .then(res => {
-          console.log(res);
-
-
           // 旧的数组
           const { goods } = this.data;
           this.setData({
@@ -83,11 +83,7 @@ Page(
 
           // 计算总页数
           this.TotalPages = Math.ceil(res.data.message.total / this.Params.pagesize);
-          console.log(this.TotalPages);
         })
-
-
-
     },
 
     // 滚动条 触底事件
@@ -106,13 +102,10 @@ Page(
     // 下拉刷新
     onPullDownRefresh() {
       // console.log("狗丢了怎么办？？？  搜狗搜索！！！");
-      this.Params.pagenum=1;
+      this.Params.pagenum = 1;
       this.setData({
-        goods:[]
+        goods: []
       })
       this.getList();
     }
-
-
-
   })
