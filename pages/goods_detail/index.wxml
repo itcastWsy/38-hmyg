@@ -1,13 +1,60 @@
 <!-- 轮播图 开始 -->
 <view class="goods_detail_swiper">
-  <swiper indicator-dots autoplay circular >
-      <swiper-item 
-      wx:for="{{goodsInfo.pics}}"
-      wx:key="pics_id"
-      >
-        <image mode="widthFix" src="{{item.pics_mid}}"></image>
-      </swiper-item>
+  <swiper indicator-dots autoplay circular>
+    <swiper-item wx:for="{{goodsInfo.pics}}" wx:key="pics_id">
+      <image mode="widthFix" src="{{item.pics_mid}}"></image>
+    </swiper-item>
   </swiper>
-    
+
 </view>
 <!-- 轮播图 结束 -->
+
+<!-- 价格 开始 -->
+<view class="goods_price">￥ {{goodsInfo.goods_price}} </view>
+<!-- 价格 结束 -->
+
+<!-- 商品名称 开始 -->
+<view class="goods_name_wrap">
+  <view class="goods_name">{{goodsInfo.goods_name}}{{goodsInfo.goods_name}}</view>
+  <view class="goods_name_collect">
+    <text class="iconfont icon-shoucang"></text>
+    <view class="icon_name">收藏</view>
+  </view>
+
+</view>
+<!-- 商品名称 结束 -->
+
+
+<!-- 图文 详情 开始 -->
+<view class="goods_desc">
+  <view class="goods_desc_title">图文详情</view>
+  <view class="goods_desc_content">
+    <!-- 富文本标签  rich-text -->
+    <rich-text nodes="{{goodsInfo.goods_introduce}}"></rich-text>
+  </view>
+</view>
+<!-- 图文详情 结束 -->
+
+
+<!-- 底部 工具栏 开始 -->
+<view class="btm_tools">
+  <view class="tool_item">
+    <text class="iconfont icon-kefu"></text>
+    <view>客服</view>
+  </view>
+  <view class="tool_item">
+    <text class="iconfont icon-yixianshi-"></text>
+    <view>分享</view>
+  </view>
+  <view class="tool_item">
+    <text class="iconfont icon-gouwuche"></text>
+    <view>购物车</view>
+  </view>
+  <view class="tool_item">
+    加入购物车
+  </view>
+  <view class="tool_item">
+    立即购买
+  </view>
+</view>
+<!-- 底部 工具栏 结束 -->
