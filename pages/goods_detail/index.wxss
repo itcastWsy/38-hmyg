@@ -1,1 +1,9 @@
-/* pages/goods_detail/index.wxss */
+.goods_detail_swiper swiper {
+  /* 400 * 400 */
+  /* 让轮播图的高度 = 宽度 宽度 =屏幕的宽度  */
+  height: 60vw;
+  text-align: center;
+}
+.goods_detail_swiper swiper image {
+  width: 60%;
+}

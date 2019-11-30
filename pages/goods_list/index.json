@@ -1,5 +1,7 @@
 {
   "usingComponents": {},
   "enablePullDownRefresh": true,
-  "backgroundTextStyle": "dark"
+  "backgroundTextStyle": "dark",
+  "navigationBarTitleText": "商品列表"
+
 }
