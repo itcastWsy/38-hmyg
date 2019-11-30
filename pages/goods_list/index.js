@@ -3,6 +3,19 @@
 2 定义接口的参数 
   ! 为了方便修改 把参数变成全局变量 
 3 发送请求 获取 商品列表数据
+4 上拉加载下一页
+  1 触发上拉事件 -  滚动条 触底事件 ？？？   onReachBottom
+  2 判断有没有下一页的数据
+    0 如何判断 
+      1 前端分页  发送请求的时候 后台一次性返回所有数据 
+  !   2  后端分页  前端只要把 页码 等参数发送到后台，后台 根据前端的参数 来返回数据
+      3 获取当前的页码  和 总的页码比较即可  
+        总条数 = 21  页容量 = 10
+        总页数 = Math.ceil(总条数 / 页容量 )
+    1 没有 提示用户
+!  2 有数据 
+   1  当前页码 ++ 
+   2 再调用 获取接口数据的函数 
 
  */
 
@@ -10,53 +23,75 @@
 
 import request from "../../utils/request";
 
-Page({
-  // 全局的接口参数
-  Params: {
-    // 查询关键字 "小米"
-    query: "",
-    // 分类id
-    cid: -1,
-    // 页码 第几页 
-    pagenum: 1,
-    // 页容量 -> 每一页可以放几条数据
-    pagesize: 2
-  },
+Page(
+  {
+    // 全局的接口参数
+    Params: {
+      // 查询关键字 "小米"
+      query: "",
+      // 分类id
+      cid: -1,
+      // 页码 第几页 
+      pagenum: 1,
+      // 页容量 -> 每一页可以放几条数据
+      pagesize: 10
+    },
+
+    // 总页数
+    TotalPages: 1,
+    data: {
+      // 要显示的商品列表
+      goods: []
+    },
 
 
-  data:{
-    // 要显示的商品列表
-    goods:[]
-  },
 
+    onLoad(options) {
+      this.Params.cid = options.cid;
 
+      this.getList();
+    },
 
-  onLoad(options) {
-    this.Params.cid = options.cid;
-    
-    this.getList();
-  },
-
-  // 获取商品列表数据
-  getList() {
-    request({
-      url: "goods/search",
-      data: this.Params
-    })
-    .then(res=>{
-      console.log(res);
-
-      this.setData({
-        goods:res.data.message.goods
+    // 获取商品列表数据
+    getList() {
+      request({
+        url: "goods/search",
+        data: this.Params
       })
-
-      // console.table(res.data.message.goods)
-    })
-
+        .then(res => {
+          console.log(res);
 
 
-  }
+          // 旧的数组
+          const { goods } = this.data;
+          this.setData({
+            // 当我们做分页了  总的数据 应该是不断 追加的！！！ 
+            goods: [...goods, ...res.data.message.goods]
+          })
+
+          // 计算总页数
+          this.TotalPages = Math.ceil(res.data.message.total / this.Params.pagesize);
+          console.log(this.TotalPages);
+        })
 
 
 
-})
+    },
+
+    // 滚动条 触底事件
+    onReachBottom() {
+      // 1 判断还有没有下一页数据
+      if (this.Params.pagenum >= this.TotalPages) {
+        // 没有下一页数据
+        console.log("没有下一页数据");
+      } else {
+        // 有下一页数据
+        this.Params.pagenum++;
+        // 发送请求获取下一页的数据
+        this.getList();
+      }
+    }
+
+
+
+  })
