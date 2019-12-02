@@ -2,7 +2,7 @@
 <view class="goods_detail_swiper">
   <swiper indicator-dots autoplay circular>
     <swiper-item wx:for="{{goodsInfo.pics}}" wx:key="pics_id">
-      <image  bindtap="handlePreviewImg" data-src="{{item.pics_big}}"   mode="widthFix" src="{{item.pics_mid}}"></image>
+      <image bindtap="handlePreviewImg" data-src="{{item.pics_big}}" mode="widthFix" src="{{item.pics_mid}}"></image>
     </swiper-item>
   </swiper>
 
@@ -41,15 +41,19 @@
   <view class="tool_item">
     <text class="iconfont icon-kefu"></text>
     <view>客服</view>
+    <button open-type="contact">contact</button>
   </view>
   <view class="tool_item">
     <text class="iconfont icon-yixianshi-"></text>
     <view>分享</view>
+    <button open-type="share" >share</button>
   </view>
-  <view class="tool_item">
+  <!-- <navigator url="/pages/goods_list/index" class="tool_item"> -->
+    <!-- open-type  -->
+  <navigator open-type="switchTab" url="/pages/cart/index" class="tool_item">
     <text class="iconfont icon-gouwuche"></text>
     <view>购物车</view>
-  </view>
+  </navigator>
   <view class="tool_item">
     加入购物车
   </view>

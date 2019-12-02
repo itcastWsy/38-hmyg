@@ -1,2 +1,4 @@
-<!--pages/cart/index.wxml-->
-<text>pages/cart/index.wxml</text>
+<button bindtap="handleChooseAddress">获取用户的收货 选择 地址</button>
+<button bindtap="handleGetAuth" >获取用户的授权状态 auth</button>
+<view bindtap="handleOpenSetting" >  js的方式来打开权限页面 </view>
+<button bindtap="handleFinalGet" >最终的版本</button>

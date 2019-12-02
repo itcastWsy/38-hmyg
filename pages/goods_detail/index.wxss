@@ -59,6 +59,13 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: relative;
+}
+.btm_tools .tool_item button {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
 }
 .btm_tools .tool_item:nth-last-child(-n+2) {
   flex: 2;
