@@ -1,25 +1,7 @@
 /* 
-1 获取用户的收货地址
-  1 设置个人的收货地址
-    1 用户可以在微信中 设置N个收货地址 
-    2 其他的微信小程序 可以 获取到 用户设置好的收货地址
-    3 其他的微信小程序 可以共享 相同的收货地址 
-! 2 在小程序中来获取用户已经设置好的收货地址
-  1 如果 按照 最简单的流程 该功能很容易
-    1 在API中已经封装好了 
-  2 但是 当用户点击了拒绝了  此时 开发者就无法再去获取用户的收货地址（体验是有问题的！！）
 
-todo 3
-  1  当用户第一次点击获取地址的时候 
-      1 用户点击 授予获取地址 按钮  自己直接获取 返回值即可
-  2  当用户第一次点击获取地址的时候 
-      1 点击了 “拒绝”
-      2 当用再次点击 “收货” 按钮的时候 无法去拿地址了
-  3  应该要这么做
-    1 弹出窗口- 授权设置页(button-open-type-openSetting) 
-      用户自己选择 “允许该小程序 获取 我的收货地址”
 
-? 4 正确的流程（看这个即可 ）
+1 正确的流程（看这个即可 ）
     1 当用户点击获取收货地址的时候 先判断 用户有没有授予权限-收货  其实就是一个变量 auth
       1 当 auth = undefined  表示 用户是第一次点击 获取收货-按钮 
       2 当 auth = true  表示 用户已经给与 权限 已经允许
@@ -33,6 +15,11 @@ todo 3
 
     4 修改成 async的方式 
 
+2 打开页面的时候
+  1 判断一下有没有收货地址的信息 （通过本地存储来判断）
+    1 没有 就显示收货地址的按钮 
+    2 有信息 把收货地址 显示到页面上即可  
+
  */
 
 import regeneratorRuntime from '../../lib/runtime/runtime';
@@ -40,39 +27,32 @@ import { getSetting, chooseAddress, openSetting } from "../../utils/wxAsync";
 
 
 Page({
-  handleChooseAddress() {
-    wx.chooseAddress({
-      success: (result) => {
-        console.log("成功");
-        console.log(result);
-      },
-      fail: (err) => {
-        console.log("失败");
-        console.log(err);
-      }
-    });
 
+  data: {
+    // 用户的收货地址
+    address: {}
   },
-  // 获取用户的授权状态
-  handleGetAuth() {
-    wx.getSetting({
-      success: (result) => {
-        console.log(result);
-      },
-      fail: () => { },
-      complete: () => { }
-    });
-  },
-  // js的方式打开设置页面
-  handleOpenSetting() {
-    wx.openSetting({
-      success: (result) => {
 
-      },
-      fail: () => { },
-      complete: () => { }
-    });
+
+  // 页面启动完毕就加载 
+  onLoad() {
+    // address ={对象}  || 空字符串
+    // const address = wx.getStorageSync("address") || {};
+    // this.setData({
+    //   address
+    // })
+    console.log("onLoad");
   },
+  onShow() {
+    // address = { 对象 } || 空字符串
+    const address = wx.getStorageSync("address") || {};
+    this.setData({
+      address
+    })
+  },
+
+
+  // 点击按钮 获取收货地址
   async handleFinalGet() {
     // 1 获取用户的授权状态
     const auth = (await getSetting()).authSetting["scope.address"];
@@ -80,8 +60,10 @@ Page({
       // auth===false
       await openSetting();
     }
-   const res= await chooseAddress(); 
-   console.log(res);
+    const res = await chooseAddress();
+    // 把数据存到缓存中
+    wx.setStorageSync("address", res);
+
 
   }
 })
