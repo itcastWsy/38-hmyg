@@ -35,6 +35,10 @@ todo 3
 
  */
 
+import regeneratorRuntime from '../../lib/runtime/runtime';
+import { getSetting, chooseAddress, openSetting } from "../../utils/wxAsync";
+
+
 Page({
   handleChooseAddress() {
     wx.chooseAddress({
@@ -69,49 +73,15 @@ Page({
       complete: () => { }
     });
   },
-  handleFinalGet() {
-    // const result1 = {
-    //   0: "hellow",
-    //   ")": 232323,
-    //   "+": 343434
-    // }
-    //  当属性名 属于笔记 奇葩的时候  要这么拿 obj["属性名"]来获取
-
-    // console.log(result1["0"]);
-    // console.log(result1[")"]);
-    // console.log(result1["+"]);
-    // return;
-    // 1 先获取用户的授权状态
-    wx.getSetting({
-      success: (result) => {
-        // 属性名比较奇怪的时候 需要通过 []来获取
-        const auth = result.authSetting['scope.address'];
-        // 当auth=undefined 或者true 都可以直接获取游用户的收货地址
-        if (auth === undefined || auth === true) {
-          // 直接获取用户的收货地址
-          wx.chooseAddress({
-            success: (result1) => {
-              console.log(result1);
-            }
-          });
-        } else {
-          // 用户曾经点击了 "拒绝"
-          wx.openSetting({
-            success: (result2) => {
-              // 直接获取收货地址
-              wx.chooseAddress({
-                success: (result1) => {
-                  console.log(result1);
-                }
-              });
-            }
-          });
-
-        }
-      },
-      fail: () => { },
-      complete: () => { }
-    });
+  async handleFinalGet() {
+    // 1 获取用户的授权状态
+    const auth = (await getSetting()).authSetting["scope.address"];
+    if (auth === false) {
+      // auth===false
+      await openSetting();
+    }
+   const res= await chooseAddress(); 
+   console.log(res);
 
   }
 })
