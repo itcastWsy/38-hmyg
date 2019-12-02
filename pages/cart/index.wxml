@@ -8,13 +8,38 @@
 
 <!-- 购物车 开始 -->
 <view class="cart_content">
-
   <view wx:if="{{carts.length}}">
+    <!-- 标题 -->
+    <view class="carts_title">购物车</view>
+    <!-- 内容 -->
+    <view class="carts_list">
+      <view class="cart_item" wx:for="{{carts}}" wx:key="goods_id">
+        <!-- 复选框 -->
+        <view class="cart_chk_wrap">
+          <checkbox  checked="{{item.isChecked}}" ></checkbox>
+        </view>
+        <!-- 商品图片 -->
+        <view class="cart_img_wrap">
+          <image mode="widthFix" src="{{item.goods_small_logo}}"></image>
+        </view>
+        <!-- 商品信息 -->
+        <view class="cart_info">
+          <view class="goods_name">{{item.goods_name}}</view>
+          <view class="goods_price_wrap">
+            <view class="goods_price">{{item.goods_price}}</view>
+            <view class="cart_tool">
+              <view class="num_item nums_btn" >-</view>
+              <view class="num_item " >{{item.nums}}</view>
+              <view class="num_item nums_btn" >+</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
 
 
-    
-    
-    
+
+
   </view>
 
   <view wx:else>
@@ -26,3 +51,8 @@
 
 </view>
 <!-- 购物车 结束 -->
+
+<view>
+  总价格:￥{{totalPrice}}
+</view>
+  

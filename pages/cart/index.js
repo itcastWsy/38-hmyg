@@ -27,6 +27,12 @@
   !   2 自己在小程序的缓存中 来存储 商品数据  数组格式 
       
   2 页面一打开 获取缓存中的购物车数据 循环显示即可 
+4 计算商品的总价格
+  1 获取缓存中的购物车数组
+  2 循环 
+    1 判断该商品的isChecked 是否为 true
+    2 获取每个商品的单价 * 要购买的数量
+    3 每个商品的总价 叠加计算 ++ 
         
  */
 
@@ -40,32 +46,20 @@ Page({
     // 用户的收货地址
     address: {},
     // 购物车数组
-    carts: []
+    carts: [],
+    // 商品的总价格
+    totalPrice: 0
   },
 
-
-  // 页面启动完毕就加载 
-  onLoad() {
-    // address ={对象}  || 空字符串
-    // const address = wx.getStorageSync("address") || {};
-    // this.setData({
-    //   address
-    // })
-    console.log("onLoad");
-
-    const carts = wx.getStorageSync("carts") || [];
-    this.setData({
-      carts
-    })
-
-
-  },
   onShow() {
+    const carts = wx.getStorageSync("carts") || [];
     // address = { 对象 } || 空字符串
     const address = wx.getStorageSync("address") || {};
     this.setData({
-      address
+      address, carts
     })
+
+    this.countAll(carts);
   },
 
 
@@ -80,6 +74,35 @@ Page({
     const res = await chooseAddress();
     // 把数据存到缓存中
     wx.setStorageSync("address", res);
+
+  },
+  // 计算总价格 -  计算购买的数量
+  countAll(carts) {
+    /* 
+  1 获取缓存中的购物车数组
+  2 循环 
+    1 判断该商品的isChecked 是否为 true
+    2 获取每个商品的单价 * 要购买的数量
+    3 每个商品的总价 叠加计算 ++ 
+     */
+
+
+    // let totalPrice = 0;
+    // carts.forEach(v => {
+    //   if(v.isChecked){
+    //     totalPrice += v.nums * v.goods_price
+    //   }
+    // })
+
+    console.log(carts);
+    let totalPrice = carts.reduce((beforSum, currenItem) => {
+      console.log(beforSum);
+      console.log(currenItem);
+    }, totalPrice);
+
+    this.setData({
+      totalPrice
+    })
 
 
   }

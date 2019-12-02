@@ -72,7 +72,9 @@ Page({
       // 不存在  顺便添加一个 购买数量 属性！！
       carts.unshift({
         ...this.data.goodsInfo,
-        nums: 1
+        nums: 1,
+        // 是否选中 
+        isChecked:true
       });
     } else {
       // 已经存在了  执行数量 ++ 
