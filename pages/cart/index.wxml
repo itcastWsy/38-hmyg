@@ -4,3 +4,4 @@
   <!-- 有收货地址了 就显示 收货地址即可 -->
   <view wx:else>{{address.userName}}</view>
 </view>
+<image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575282541783&di=4c9ef6afda0af8efef67cea2c3787d22&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20161127%2F37aa07d0e015488fa458c5868395c4b8_th.jpg"></image>
