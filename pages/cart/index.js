@@ -25,11 +25,8 @@
     1 在商品的详情页面 点击 “加入购物车” 
       1 把购物车相关的数据 发送到后台 ！！！ 
   !   2 自己在小程序的缓存中 来存储 商品数据  数组格式 
-        [
-          {
-            图片路径，商品的名称，商品的价格，购买的数量。。。。
-          }
-        ]
+      
+  2 页面一打开 获取缓存中的购物车数据 循环显示即可 
         
  */
 
@@ -41,7 +38,9 @@ Page({
 
   data: {
     // 用户的收货地址
-    address: {}
+    address: {},
+    // 购物车数组
+    carts: []
   },
 
 
@@ -53,6 +52,13 @@ Page({
     //   address
     // })
     console.log("onLoad");
+
+    const carts = wx.getStorageSync("carts") || [];
+    this.setData({
+      carts
+    })
+
+
   },
   onShow() {
     // address = { 对象 } || 空字符串
