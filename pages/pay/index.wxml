@@ -32,6 +32,6 @@
   <view class="all_price_wrap">
     总价格: <text>￥{{totalPrice}}</text>
   </view>
-  <view class="account" bindtap="goPay">支付({{nums}})</view>
+  <button class="account"  open-type="getUserInfo" bindgetuserinfo="handleGetUserInfo" >支付({{nums}})</button>
 
 </view>

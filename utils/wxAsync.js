@@ -44,3 +44,36 @@ export const openSetting = () => {
     });
   })
 }
+
+
+
+/**
+ * 执行登录
+ */
+export const login = () => {
+  return new Promise((resolve, reject) => {
+    wx.login({
+      timeout: 10000,
+      success: (result) => {
+        resolve(result);
+      }
+    });
+  })
+}
+// /**
+//  * 根据高度和名称来执行登录
+//  * @param {Number} num 高度
+//  * @param {String} str 名称
+//  */
+// export const login = (num,str) => {
+//   return new Promise((resolve, reject) => {
+//     wx.login({
+//       timeout: 10000,
+//       success: (result) => {
+//         resolve(result);
+//       }
+//     });
+//   })
+// }
+
+
