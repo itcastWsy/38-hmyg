@@ -43,8 +43,9 @@ Page({
     const carts = wx.getStorageSync("carts") || [];
     // address = { 对象 } || 空字符串
     const address = wx.getStorageSync("address") || {};
+    // carts 应该要返回用户选择了的商品
     this.setData({
-      address, carts
+      address, carts: carts.filter(v => v.isChecked)
     })
 
     this.countAll(carts);
@@ -76,9 +77,29 @@ Page({
     }
     //  3 获取用户的token
     // 可能因为后台的接口问题 我们自己再做测试的时候 要多点几次为准 
-    const res=await request({url:"users/wxlogin",method:"post",data:loginParams});
+    // const res = await request().data.message.token
+    const token = (await request({ url: "users/wxlogin", method: "post", data: loginParams })).data.message.token
+
+    // 4 获取订单编号要 参数
+    let orderParams = {
+      // 订单的总价格
+      order_price: this.data.totalPrice,
+      // 收货地址(暂时只写省份)
+      consignee_addr: this.data.address.provinceName,
+      // 商品数组 具体的说明看接口文档
+      goods: this.data.carts.map(v => (
+        {
+          goods_id: v.goods_id,
+          // 购买的数量
+          goods_number: v.nums,
+          goods_price: v.goods_price
+        }))
+    }
+
+    // 5 创建订单 获取订单编号 
+    const order_number = (await request({ url: "my/orders/create", method: "post", data: orderParams, header: { Authorization: token } })).data.message.order_number;
+    console.log(res);
 
   }
 
 })
-
