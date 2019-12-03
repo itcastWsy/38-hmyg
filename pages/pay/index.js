@@ -25,7 +25,7 @@
 
 
 import regeneratorRuntime from '../../lib/runtime/runtime';
-import { getSetting, chooseAddress, openSetting, login } from "../../utils/wxAsync";
+import { getSetting, chooseAddress, openSetting, login, requestPayment } from "../../utils/wxAsync";
 import request from "../../utils/request";
 Page({
   data: {
@@ -98,8 +98,40 @@ Page({
 
     // 5 创建订单 获取订单编号 
     const order_number = (await request({ url: "my/orders/create", method: "post", data: orderParams, header: { Authorization: token } })).data.message.order_number;
-    console.log(res);
 
+    // 6 获取支付参数
+    const pay = (await request({ url: "my/orders/req_unifiedorder", method: "post", data: { order_number }, header: { Authorization: token } })).data.message.pay;
+
+    // 7 调起微信支付   手机会出现支付的画面 
+    const res = (await requestPayment(pay));
+
+    // 8 还需要查看一下 我们自己的后台的订单状态
+    const res1 = (await request({ url: "my/orders/chkOrder", method: "post", data: { order_number }, header: { Authorization: token } }));
+
+    // 9 支付成功了 
+    // 1 把缓存中的已经支付了的商品 删除掉 
+    // 2 弹出窗口 提示用户 支付成功
+    // 3 跳转到 订单页面即可
+
+
+    // 9.1 获取缓存中的完整的购物车数据
+    let carts = wx.getStorageSync("carts");
+    // 留下未选中的商品即可
+    carts = carts.filter(v => !v.isChecked);
+    wx.setStorageSync("carts", carts);
+    // 9.2 弹出窗口 提示用户 
+    wx.showToast({
+      title: '支付成功',
+      duration: 1500,
+      mask: true,
+      success: (result) => {
+        // 9.3  跳转到 订单页面即可
+        wx.navigateTo({
+          url: '/pages/order/index'
+        });
+      }
+    });
   }
-
 })
+
+

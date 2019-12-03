@@ -60,6 +60,36 @@ export const login = () => {
     });
   })
 }
+
+
+/**
+ * 微信支付
+ */
+export const requestPayment = (pay) => {
+  return new Promise((resolve, reject) => {
+    wx.requestPayment({
+      ...pay,
+      success: (result) => {
+        resolve(result);
+      }
+    });
+
+  })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // /**
 //  * 根据高度和名称来执行登录
 //  * @param {Number} num 高度
