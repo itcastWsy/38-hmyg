@@ -16,8 +16,8 @@
       <view class="cart_item" wx:for="{{carts}}" wx:key="goods_id">
         <!-- 复选框 -->
         <view class="cart_chk_wrap">
-          <checkbox-group bindchange="checkboxChange" data-index="{{index}}" >
-            <checkbox    checked="{{item.isChecked}}" ></checkbox>
+          <checkbox-group bindchange="checkboxChange" data-index="{{index}}">
+            <checkbox checked="{{item.isChecked}}"></checkbox>
           </checkbox-group>
         </view>
         <!-- 商品图片 -->
@@ -30,9 +30,11 @@
           <view class="goods_price_wrap">
             <view class="goods_price">{{item.goods_price}}</view>
             <view class="cart_tool">
-              <view  bindtap="handleNumUpdate"  data-index="{{index}}" data-unit="{{-1}}"  class="num_item nums_btn" >-</view>
-              <view  class="num_item" >{{item.nums}}</view>
-              <view  bindtap="handleNumUpdate"  data-index="{{index}}" data-unit="{{1}}"  class="num_item nums_btn" >+</view>
+              <view bindtap="handleNumUpdate" data-index="{{index}}" data-unit="{{-1}}" class="num_item nums_btn">-
+              </view>
+              <view class="num_item">{{item.nums}}</view>
+              <view bindtap="handleNumUpdate" data-index="{{index}}" data-unit="{{1}}" class="num_item nums_btn">+
+              </view>
             </view>
           </view>
         </view>
@@ -54,13 +56,15 @@
 </view>
 <!-- 购物车 结束 -->
 
-<view>
+<view class="btm_count_wrap">
+  <view class="all_check_wrap">
+    <checkbox-group bindchange="handleItemAll">
+      <checkbox checked="{{allChecked}}"> 全选 </checkbox>
+    </checkbox-group>
+  </view>
+  <view class="all_price_wrap">
+    总价格: <text>￥{{totalPrice}}</text>
+  </view>
+  <view class="account">结算({{nums}})</view>
 
-  <checkbox-group bindchange="handleItemAll">
-    <checkbox checked="{{allChecked}}" ></checkbox>
-  </checkbox-group>
-    
-
-  总价格:￥{{totalPrice}} 总数量:{{nums}}
 </view>
-  

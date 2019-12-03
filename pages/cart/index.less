@@ -79,3 +79,39 @@
     }
   }
 }
+
+.btm_count_wrap {
+  height: 90rpx;
+  display: flex;
+  border-top: 1rpx solid #ccc;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  .all_check_wrap {
+    flex: 4;
+    display: flex;
+    padding-left: 5rpx;
+    align-items: center;
+    checkbox-group {
+    }
+  }
+
+  .all_price_wrap {
+    flex: 3;
+    text {
+      color: var(--themeColor);
+    }
+  }
+
+  .account {
+    flex: 2;
+    background-color: var(--themeColor);
+    font-size: 30rpx;
+    font-weight: 600;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

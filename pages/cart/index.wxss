@@ -66,3 +66,34 @@
 .cart_content view .carts_list .cart_item .cart_info .goods_price_wrap .cart_tool .nums_btn {
   border: 1rpx solid #ccc;
 }
+.btm_count_wrap {
+  height: 90rpx;
+  display: flex;
+  border-top: 1rpx solid #ccc;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+}
+.btm_count_wrap .all_check_wrap {
+  flex: 4;
+  display: flex;
+  padding-left: 5rpx;
+  align-items: center;
+}
+.btm_count_wrap .all_price_wrap {
+  flex: 3;
+}
+.btm_count_wrap .all_price_wrap text {
+  color: var(--themeColor);
+}
+.btm_count_wrap .account {
+  flex: 2;
+  background-color: var(--themeColor);
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
