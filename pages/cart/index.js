@@ -200,12 +200,10 @@ Page({
       });
     } else {
       carts[index].nums += unit;
-
       this.setData({
         carts
       })
       wx.setStorageSync("carts", carts);
-
       this.countAll(carts);
     }
 
@@ -229,7 +227,6 @@ Page({
     // 1 获取收货地址
     // 2 获取用户 选中了 的商品的数组的长度  filter 
     // 也可通过 nums来做判断 都ok！！！
-
     const { address, carts } = this.data;
     if (!address.userName) {
       wx.showToast({
@@ -250,12 +247,12 @@ Page({
 
     // 通过了验证的
     // console.log("跳转到结算页面了！");
-
     wx.navigateTo({
       url: '/pages/pay/index'
     });
-
-
-
   }
 }) 
+
+
+
+

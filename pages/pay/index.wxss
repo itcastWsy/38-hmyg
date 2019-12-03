@@ -1,1 +1,74 @@
-/* pages/pay/index.wxss */
+.cart_content .carts_title {
+  padding: 20rpx;
+  color: var(--themeColor);
+  font-size: 30rpx;
+  font-weight: 600;
+  border-top: 1rpx solid currentColor;
+  border-bottom: 1rpx solid currentColor;
+}
+.cart_content .carts_list .cart_item {
+  display: flex;
+  border-bottom: 1rpx solid #ccc;
+  padding: 10rpx 0;
+}
+.cart_content .carts_list .cart_item .cart_img_wrap {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cart_content .carts_list .cart_item .cart_img_wrap image {
+  width: 80%;
+}
+.cart_content .carts_list .cart_item .cart_info {
+  flex: 4;
+  overflow: hidden;
+  font-size: 24rpx;
+  color: #666;
+  padding: 10rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.cart_content .carts_list .cart_item .cart_info .goods_name {
+  display: -webkit-box;
+  overflow: hidden;
+  white-space: normal !important;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.cart_content .carts_list .cart_item .cart_info .goods_price_wrap {
+  display: flex;
+  justify-content: space-between;
+}
+.cart_content .carts_list .cart_item .cart_info .goods_price_wrap .goods_price {
+  color: var(--themeColor);
+  font-size: 28rpx;
+}
+.btm_count_wrap {
+  height: 90rpx;
+  display: flex;
+  border-top: 1rpx solid #ccc;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+}
+.btm_count_wrap .all_price_wrap {
+  flex: 3;
+}
+.btm_count_wrap .all_price_wrap text {
+  color: var(--themeColor);
+}
+.btm_count_wrap .account {
+  flex: 2;
+  background-color: var(--themeColor);
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
