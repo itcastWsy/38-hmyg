@@ -30,9 +30,9 @@
           <view class="goods_price_wrap">
             <view class="goods_price">{{item.goods_price}}</view>
             <view class="cart_tool">
-              <view class="num_item nums_btn" >-</view>
-              <view class="num_item " >{{item.nums}}</view>
-              <view class="num_item nums_btn" >+</view>
+              <view  bindtap="handleNumUpdate"  data-index="{{index}}" data-unit="{{-1}}"  class="num_item nums_btn" >-</view>
+              <view  class="num_item" >{{item.nums}}</view>
+              <view  bindtap="handleNumUpdate"  data-index="{{index}}" data-unit="{{1}}"  class="num_item nums_btn" >+</view>
             </view>
           </view>
         </view>

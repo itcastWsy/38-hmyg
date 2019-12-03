@@ -41,14 +41,19 @@
 
     给data赋值
     给缓存赋值 即可
+
+6 编辑数量
+  1 点击 "+" 或者 "-" 
+  2 点击  "+" 执行数量 ++
+  3 点击  "-" 执行数量 --
+  4 其他情况 
+    1 当数量 大于 等于 库存    提示用户即可
+    2 当数量 小于 等于 1 的时候 提示用户 "是否要删除。。。"
  */
 
 import regeneratorRuntime from '../../lib/runtime/runtime';
 import { getSetting, chooseAddress, openSetting } from "../../utils/wxAsync";
-
-
 Page({
-
   data: {
     // 用户的收货地址
     address: {},
@@ -94,8 +99,6 @@ Page({
     2 获取每个商品的单价 * 要购买的数量
     3 每个商品的总价 叠加计算 ++ 
      */
-
-
     let totalPrice = 0;
     let nums = 0;
     carts.forEach(v => {
@@ -119,17 +122,80 @@ Page({
     const { index } = e.currentTarget.dataset;
     let { carts } = this.data;
     // 对选中状态 做取反
-    carts[index].isChecked=!carts[index].isChecked;
+    carts[index].isChecked = !carts[index].isChecked;
 
     // 2 把数组 设置回 data中 和 缓存中
     this.setData({
       carts
     })
 
-    wx.setStorageSync("carts", carts); 
+    wx.setStorageSync("carts", carts);
 
     // 重新计算总价格   小程序中没有计算属性（页面中没有计算属性，组件中却是有计算属性！！！）
     this.countAll(carts);
-      
+
+  },
+  // 数量的编辑 
+  handleNumUpdate(e) {
+
+
+
+
+
+
+    // unit = +1 || -1 
+    // index 等于 要编辑的元素的索引 carts[index]
+    const { unit, index } = e.currentTarget.dataset;
+    // 获取到了 data中的购物车数组
+    let { carts } = this.data;
+
+
+    // 判断 数量是否超出界限 
+    // 1 当数量大于等于库存 提示用户  unit也做判断 
+    // 2 当数量等于1 unit也做判断 
+    if (unit === 1 && carts[index].nums >= carts[index].goods_number) {
+      wx.showToast({
+        title: '库存不足了',
+        icon: 'none',
+        mask: true
+      });
+      return
+    } else if (carts[index].nums === 1 && unit === -1) {
+      // 提示用户 是否要删除商品
+      wx.showModal({
+        title: '警告',
+        content: '您是否要删除该商品？',
+        showCancel: true,
+        cancelText: '取消',
+        cancelColor: '#000000',
+        confirmText: '确定',
+        confirmColor: '#3CC51F',
+        success: (result) => {
+          if (result.confirm) {
+            /* 
+            删除数组的一个元素而已！！
+            */
+            carts.splice(index, 1);
+            this.setData({
+              carts
+            })
+            wx.setStorageSync("carts", carts);
+            this.countAll(carts);
+          } else {
+            console.log("取消");
+          }
+        }
+      });
+    } else {
+      carts[index].nums += unit;
+
+      this.setData({
+        carts
+      })
+      wx.setStorageSync("carts", carts);
+
+      this.countAll(carts);
+    }
+
   }
 }) 
