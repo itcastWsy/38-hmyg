@@ -55,6 +55,11 @@
   2 用户主动点击 “全选” 把 全选的状态 映射到 小商品的复选框中 
     1 对carts数组循环
       把每一个商品的选中状态 == 当前的全选状态即可 
+
+8 点击 “结算”
+  1 判断用户有没选择 收货地址 获取 选中的了商品
+  2 验证是否通过
+  3 直接跳转到结算页面！！ 
  */
 
 import regeneratorRuntime from '../../lib/runtime/runtime';
@@ -217,6 +222,40 @@ Page({
 
     wx.setStorageSync("carts", carts);
     this.countAll(carts);
+
+  },
+  // 结算事件
+  goAccount() {
+    // 1 获取收货地址
+    // 2 获取用户 选中了 的商品的数组的长度  filter 
+    // 也可通过 nums来做判断 都ok！！！
+
+    const { address, carts } = this.data;
+    if (!address.userName) {
+      wx.showToast({
+        title: '请选择您的收货地址',
+        icon: 'none',
+        mask: true
+      });
+      return
+    } else if (carts.filter(v => v.isChecked).length === 0) {
+      wx.showToast({
+        title: '请选中要结算的商品',
+        icon: 'none',
+        mask: true
+      });
+
+      return
+    }
+
+    // 通过了验证的
+    // console.log("跳转到结算页面了！");
+
+    wx.navigateTo({
+      url: '/pages/pay/index'
+    });
+
+
 
   }
 }) 

@@ -65,6 +65,8 @@
   <view class="all_price_wrap">
     总价格: <text>￥{{totalPrice}}</text>
   </view>
-  <view class="account">结算({{nums}})</view>
+  <view class="account" bindtap="goAccount" >结算({{nums}})</view>
 
 </view>
+
+<navigator open-type=""></navigator>
