@@ -49,6 +49,12 @@
   4 其他情况 
     1 当数量 大于 等于 库存    提示用户即可
     2 当数量 小于 等于 1 的时候 提示用户 "是否要删除。。。"
+
+7 全选
+  1 数据的显示 - 把全选的显示功能 也放入到计算总价格和总数量中 函数 
+  2 用户主动点击 “全选” 把 全选的状态 映射到 小商品的复选框中 
+    1 对carts数组循环
+      把每一个商品的选中状态 == 当前的全选状态即可 
  */
 
 import regeneratorRuntime from '../../lib/runtime/runtime';
@@ -62,7 +68,9 @@ Page({
     // 商品的总价格
     totalPrice: 0,
     // 结算的数量
-    nums: 0
+    nums: 0,
+    // 全选
+    allChecked: false
   },
 
   onShow() {
@@ -101,16 +109,22 @@ Page({
      */
     let totalPrice = 0;
     let nums = 0;
+    // 只要有一个商品没选中 它的值就是false
+    let allChecked = true;
     carts.forEach(v => {
       if (v.isChecked) {
         totalPrice += v.nums * v.goods_price
         // 我们要的是总的数量 而不是要购买的种类！！
         nums += v.nums
+      } else {
+        // 未选中 
+        allChecked = false;
       }
     })
     this.setData({
       totalPrice,
-      nums
+      nums,
+      allChecked
     })
   },
 
@@ -137,18 +151,11 @@ Page({
   },
   // 数量的编辑 
   handleNumUpdate(e) {
-
-
-
-
-
-
     // unit = +1 || -1 
     // index 等于 要编辑的元素的索引 carts[index]
     const { unit, index } = e.currentTarget.dataset;
     // 获取到了 data中的购物车数组
     let { carts } = this.data;
-
 
     // 判断 数量是否超出界限 
     // 1 当数量大于等于库存 提示用户  unit也做判断 
@@ -196,6 +203,20 @@ Page({
 
       this.countAll(carts);
     }
+
+  },
+  // 全选按钮
+  handleItemAll() {
+    //  1 获取自己的选中状态
+    let { allChecked, carts } = this.data;
+    allChecked = !allChecked;
+    carts.forEach(v => v.isChecked = allChecked);
+    this.setData({
+      carts
+    })
+
+    wx.setStorageSync("carts", carts);
+    this.countAll(carts);
 
   }
 }) 

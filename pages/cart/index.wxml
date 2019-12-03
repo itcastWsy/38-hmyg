@@ -55,6 +55,12 @@
 <!-- 购物车 结束 -->
 
 <view>
+
+  <checkbox-group bindchange="handleItemAll">
+    <checkbox checked="{{allChecked}}" ></checkbox>
+  </checkbox-group>
+    
+
   总价格:￥{{totalPrice}} 总数量:{{nums}}
 </view>
   
