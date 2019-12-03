@@ -16,7 +16,9 @@
       <view class="cart_item" wx:for="{{carts}}" wx:key="goods_id">
         <!-- 复选框 -->
         <view class="cart_chk_wrap">
-          <checkbox  checked="{{item.isChecked}}" ></checkbox>
+          <checkbox-group bindchange="checkboxChange" data-index="{{index}}" >
+            <checkbox    checked="{{item.isChecked}}" ></checkbox>
+          </checkbox-group>
         </view>
         <!-- 商品图片 -->
         <view class="cart_img_wrap">
@@ -53,6 +55,6 @@
 <!-- 购物车 结束 -->
 
 <view>
-  总价格:￥{{totalPrice}}
+  总价格:￥{{totalPrice}} 总数量:{{nums}}
 </view>
   

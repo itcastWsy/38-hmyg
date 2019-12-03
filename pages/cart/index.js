@@ -33,7 +33,14 @@
     1 判断该商品的isChecked 是否为 true
     2 获取每个商品的单价 * 要购买的数量
     3 每个商品的总价 叠加计算 ++ 
-        
+
+5  复选框的选中功能
+  1 绑定 change事件 给它的父元素 checkbox-group 添加！！ （和radio 一样  radio-group）
+  2 把选中或者未选中的值 都写入到 data中 ， 缓存中 
+  3 获取到当前的选中状态 （拿旧的选中状态 直接取反 ）
+
+    给data赋值
+    给缓存赋值 即可
  */
 
 import regeneratorRuntime from '../../lib/runtime/runtime';
@@ -48,7 +55,9 @@ Page({
     // 购物车数组
     carts: [],
     // 商品的总价格
-    totalPrice: 0
+    totalPrice: 0,
+    // 结算的数量
+    nums: 0
   },
 
   onShow() {
@@ -87,23 +96,40 @@ Page({
      */
 
 
-    // let totalPrice = 0;
-    // carts.forEach(v => {
-    //   if(v.isChecked){
-    //     totalPrice += v.nums * v.goods_price
-    //   }
-    // })
-
-    console.log(carts);
-    let totalPrice = carts.reduce((beforSum, currenItem) => {
-      console.log(beforSum);
-      console.log(currenItem);
-    }, totalPrice);
-
+    let totalPrice = 0;
+    let nums = 0;
+    carts.forEach(v => {
+      if (v.isChecked) {
+        totalPrice += v.nums * v.goods_price
+        // 我们要的是总的数量 而不是要购买的种类！！
+        nums += v.nums
+      }
+    })
     this.setData({
-      totalPrice
+      totalPrice,
+      nums
+    })
+  },
+
+  // 单个商品的选中事件
+  checkboxChange(e) {
+    /* 
+    1 如何知道用户点击的是哪个 商品呢 （可以根据 id 或者索引来获取到该元素 ）
+     */
+    const { index } = e.currentTarget.dataset;
+    let { carts } = this.data;
+    // 对选中状态 做取反
+    carts[index].isChecked=!carts[index].isChecked;
+
+    // 2 把数组 设置回 data中 和 缓存中
+    this.setData({
+      carts
     })
 
+    wx.setStorageSync("carts", carts); 
 
+    // 重新计算总价格   小程序中没有计算属性（页面中没有计算属性，组件中却是有计算属性！！！）
+    this.countAll(carts);
+      
   }
-})
+}) 
