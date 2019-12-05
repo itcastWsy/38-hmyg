@@ -93,6 +93,14 @@
 					"id": -1,
 					"name": "支付",
 					"pathName": "pages/pay/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "商品搜索",
+					"pathName": "pages/search/index",
+					"query": "",
 					"scene": null
 				}
 			]

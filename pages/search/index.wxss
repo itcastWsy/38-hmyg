@@ -1,1 +1,28 @@
-/* pages/search/index.wxss */
+.search_view {
+  background-color: #eee;
+  padding: 20rpx;
+}
+.search_form {
+  height: 60rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.search_form input {
+  width: 60%;
+  background-color: #fff;
+  height: 100%;
+}
+.search_form button {
+  width: 35%;
+  background-color: #fff;
+  height: 100%;
+  min-height:100%;
+  padding: 0;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.list {
+}
